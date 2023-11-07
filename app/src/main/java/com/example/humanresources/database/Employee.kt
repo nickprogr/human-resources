@@ -7,7 +7,7 @@ import java.util.Date
 
 @Entity
 data class Employee(
-    @PrimaryKey(autoGenerate = true) val id: String,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "first_name") val firstName: String,
     @ColumnInfo(name = "last_name") var lastName: String,
     @ColumnInfo(name = "starting_date") var startingDate: Date = Date(),
