@@ -1,10 +1,13 @@
-package com.example.humanresources.database
+package com.example.humanresources
 
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
+import com.example.humanresources.database.AppDatabase
+import com.example.humanresources.database.Employee
+import kotlinx.coroutines.flow.first
 
-class EmployeeRepository {
+object EmployeeRepository {
     private val TAG = EmployeeRepository::class.java.name
 
     private lateinit var db: AppDatabase
@@ -30,8 +33,12 @@ class EmployeeRepository {
         db.employeeDao().update(employee)
     }
 
-    fun getEmployee(id: Int) {
-        db.employeeDao().getById(id)
+    suspend fun getEmployee(id: Int): Employee? {
+        return db.employeeDao().getById(id).first()
+    }
+
+    suspend fun getOrFetchEmployee(id: Int): Employee {
+        return db.employeeDao().getById(id).first() ?: ApiService.fetchEmployee(id).first()
     }
 
     fun getNumberOfEmployees() {

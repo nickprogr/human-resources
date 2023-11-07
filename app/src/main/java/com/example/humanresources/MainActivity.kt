@@ -26,6 +26,8 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        EmployeeRepository.initRepository(this)
     }
 }
 

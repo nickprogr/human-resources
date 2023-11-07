@@ -16,13 +16,13 @@ interface EmployeeDao {
     fun insertMany(vararg employee: Employee)
 
     @Update
-    fun update(vararg employees: Employee)
+    fun update(vararg employees: Employee): Int
 
     @Query("SELECT * FROM employee")
-    fun getAll(): Flow<List<Employee>>
+    fun getAll(): Flow<List<Employee>?>
 
     @Query("SELECT * FROM employee WHERE id = :employeeId")
-    fun getById(employeeId: Int): Flow<List<Employee>>
+    fun getById(employeeId: Int): Flow<Employee?>
 
     @Query("DELETE FROM employee WHERE id = :employeeId")
     fun deleteById(employeeId: Int): Int
