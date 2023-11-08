@@ -11,5 +11,6 @@ data class Employee(
     @ColumnInfo(name = "first_name") val firstName: String,
     @ColumnInfo(name = "last_name") var lastName: String,
     @ColumnInfo(name = "starting_date") var startingDate: Date = Date(),
-    @ColumnInfo(name = "has_received_laptop") var hasReceivedLaptop: Boolean
+    @ColumnInfo(name = "has_received_laptop") var hasReceivedLaptop: Boolean,
+    @ColumnInfo(name = "has_received_smartphone") var hasReceivedSmartphone: Boolean
 )

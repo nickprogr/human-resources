@@ -6,9 +6,17 @@ import kotlinx.coroutines.flow.flow
 import java.util.Date
 
 object ApiService {
-
     fun fetchEmployee(id: Int): Flow<Employee> {
         /* mockEmployee */
-        return flow { Employee(999, "John", "Doe", Date(), hasReceivedLaptop = false) }
+        return flow {
+            Employee(
+                999,
+                "John",
+                "Doe",
+                startingDate = Date(),
+                hasReceivedLaptop = false,
+                hasReceivedSmartphone = false
+            )
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.room.Room
 import com.example.humanresources.database.AppDatabase
 import com.example.humanresources.database.Employee
+import com.example.humanresources.database.MIGRATION_1_2
 import kotlinx.coroutines.flow.first
 
 object EmployeeRepository {
@@ -22,7 +23,7 @@ object EmployeeRepository {
             context.applicationContext,
             AppDatabase::class.java,
             "employees"
-        ).build()
+        ).addMigrations(MIGRATION_1_2).build()
     }
 
     fun addEmployee(employee: Employee) {
