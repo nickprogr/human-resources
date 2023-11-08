@@ -6,6 +6,8 @@ import androidx.room.Room
 import com.example.humanresources.database.AppDatabase
 import com.example.humanresources.database.Employee
 import com.example.humanresources.database.MIGRATION_1_2
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.first
 
 object EmployeeRepository {
@@ -34,12 +36,18 @@ object EmployeeRepository {
         db.employeeDao().update(employee)
     }
 
-    suspend fun getEmployee(id: Int): Employee? {
-        return db.employeeDao().getById(id).first()
+    fun getEmployee(id: Int): Employee? {
+        return db.employeeDao().getById(id)
     }
 
-    suspend fun getOrFetchEmployee(id: Int): Employee {
-        return db.employeeDao().getById(id).first() ?: ApiService.fetchEmployee(id).first()
+    fun getEmployeeWithFlow(id: Int): Flow<Employee?> {
+        return db.employeeDao().getByIdWithFlow(id)
+    }
+
+    suspend fun getOrFetchEmployeeWithFlow(id: Int): Flow<Employee?> {
+        return if (db.employeeDao().getByIdWithFlow(id).first() == null) {
+            ApiService.fetchEmployee(id)
+        } else db.employeeDao().getByIdWithFlow(id)
     }
 
     fun getNumberOfEmployees() {

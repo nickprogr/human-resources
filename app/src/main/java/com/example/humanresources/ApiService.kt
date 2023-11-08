@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.flow
 import java.util.Date
 
 object ApiService {
-    fun fetchEmployee(id: Int): Flow<Employee> {
+    fun fetchEmployee(id: Int): Flow<Employee?> {
         /* mockEmployee */
         return flow {
-            Employee(
+            val employee = Employee(
                 999,
                 "John",
                 "Doe",
@@ -17,6 +17,7 @@ object ApiService {
                 hasReceivedLaptop = false,
                 hasReceivedSmartphone = false
             )
+            emit(employee)
         }
     }
 }

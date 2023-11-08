@@ -19,10 +19,16 @@ interface EmployeeDao {
     fun update(vararg employees: Employee): Int
 
     @Query("SELECT * FROM employee")
-    fun getAll(): Flow<List<Employee>?>
+    fun getAll(): List<Employee>?
 
     @Query("SELECT * FROM employee WHERE id = :employeeId")
-    fun getById(employeeId: Int): Flow<Employee?>
+    fun getById(employeeId: Int): Employee?
+
+    @Query("SELECT * FROM employee")
+    fun getAllWithFlow(): List<Employee>?
+
+    @Query("SELECT * FROM employee WHERE id = :employeeId")
+    fun getByIdWithFlow(employeeId: Int): Flow<Employee?>
 
     @Query("DELETE FROM employee WHERE id = :employeeId")
     fun deleteById(employeeId: Int): Int
