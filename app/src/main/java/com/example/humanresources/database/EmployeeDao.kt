@@ -1,6 +1,7 @@
 package com.example.humanresources.database
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -25,10 +26,13 @@ interface EmployeeDao {
     fun getById(employeeId: Int): Employee?
 
     @Query("SELECT * FROM employee")
-    fun getAllWithFlow(): List<Employee>?
+    fun getAllWithFlow(): Flow<List<Employee>?>
 
     @Query("SELECT * FROM employee WHERE id = :employeeId")
     fun getByIdWithFlow(employeeId: Int): Flow<Employee?>
+
+    @Delete
+    fun delete(employee: Employee): Int
 
     @Query("DELETE FROM employee WHERE id = :employeeId")
     fun deleteById(employeeId: Int): Int
